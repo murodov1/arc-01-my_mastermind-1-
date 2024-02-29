@@ -1,27 +1,17 @@
-NAME = my_mastermind
 CC = gcc
-SRCS_DIR = ./srcs/
-INCLUDES = ./includes/
-RM = /bin/rm -f
-FILES = my_mastermind useful_funcs options logic
-CFILES = $(patsubst %, $(SRCS_DIR)%.c, $(FILES))
-OFILES = $(patsubst %, %.o, $(FILES))
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME)
+TARGET = my_mastermind
 
-$(OFILES):
-	@$(CC) $(CFLAGS) -c -I $(INCLUDES) $(CFILES)
+SRCS = my_mastermind.c
 
-$(NAME): $(OFILES)
-	@$(CC) $(CFLAGS) $(OFILES) -o $(NAME)
+$(TARGET): $(SRCS)
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	@$(RM) $(OFILES)
+	rm -f $(TARGET)
 
-fclean: clean
-	@$(RM) $(NAME)
+.PHONY:fclean
 
-re: fclean all
-
-.PHONY: all clean fclean re
+fclean: 
+	rm -rf $(TARGET)
